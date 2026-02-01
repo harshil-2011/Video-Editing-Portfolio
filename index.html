@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harshboy.xe | Professional Video Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #050505;
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+            top: -20%;
+            left: -10%;
+            z-index: -1;
+            animation: pulse 10s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1) translate(0, 0); opacity: 0.4; }
+            100% { transform: scale(1.1) translate(5%, 5%); opacity: 0.7; }
+        }
+
+        .work-card {
+            background: #111;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .work-card:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            transform: translateY(-8px);
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 100;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Video Modal Styles */
+        #videoModal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/918889194580" target="_blank" class="whatsapp-float bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="text-2xl font-black tracking-tighter">
+                <span class="gradient-text">HARSHBOY</span>.XE
+            </div>
+            <div class="hidden md:flex space-x-10 font-bold text-xs uppercase tracking-[0.2em] text-gray-400">
+                <a href="#home" class="hover:text-white transition-colors">Home</a>
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#work" class="hover:text-white transition-colors">Showcase</a>
+                <a href="#hire" class="hover:text-white transition-colors">Hire Me</a>
+            </div>
+            <a href="https://wa.me/918889194580" target="_blank" class="px-6 py-2 bg-indigo-600 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-600/20">
+                WhatsApp Chat
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen flex items-center justify-center pt-20">
+        <div class="hero-glow"></div>
+        <div class="relative z-10 text-center px-6 max-w-5xl" data-aos="zoom-out" data-aos-duration="1200">
+            <h2 class="text-indigo-400 font-bold tracking-[0.4em] uppercase mb-6 text-sm">Expert Video Editor</h2>
+            <h1 class="text-6xl md:text-[10rem] font-black mb-8 leading-none tracking-tighter">
+                Harshboy<span class="gradient-text">.xe</span>
+            </h1>
+            <p class="text-gray-400 text-lg md:text-2xl mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+                Transforming raw ideas into <span class="text-white font-semibold">viral content</span>. 
+                Documentaries, Reels, and high-retention YouTube edits.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                <a href="#work" class="w-full sm:w-auto px-12 py-5 bg-white text-black font-black uppercase tracking-widest text-sm rounded-full hover:bg-indigo-500 hover:text-white transition-all transform hover:scale-105 shadow-2xl">
+                    View Portfolio
+                </a>
+                <!-- The "Hire Me Now" button calls the navigateToHire function -->
+                <button onclick="navigateToHire()" class="w-full sm:w-auto px-12 py-5 border border-white/20 rounded-full font-black uppercase tracking-widest text-sm hover:bg-white/10 transition-all">
+                    Hire Me Now
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32">
+        <div class="max-w-4xl mx-auto px-6 text-center" data-aos="fade-up">
+            <span class="inline-block px-4 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-bold uppercase tracking-widest text-indigo-400 mb-8">My Story</span>
+            <h2 class="text-4xl md:text-6xl font-black mb-10 tracking-tighter">16 Years Old. <br>2 Years of <span class="gradient-text">Pro Editing.</span></h2>
+            <p class="text-xl text-gray-400 leading-relaxed mb-12">
+                I've spent the last 2 years mastering the art of visual storytelling. I don't just cut clips; I build retention. Whether it's a deep-dive documentary or a fast-paced 60-second reel, I ensure your audience stays hooked until the very last frame.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-3xl font-black text-white">2+</h4>
+                    <p class="text-xs text-gray-500 uppercase font-bold tracking-widest">Years Exp</p>
+                </div>
+                <div>
+                    <h4 class="text-3xl font-black text-white">100+</h4>
+                    <p class="text-xs text-gray-500 uppercase font-bold tracking-widest">Videos</p>
+                </div>
+                <div>
+                    <h4 class="text-3xl font-black text-white">50+</h4>
+                    <p class="text-xs text-gray-500 uppercase font-bold tracking-widest">Clients</p>
+                </div>
+                <div>
+                    <h4 class="text-3xl font-black text-white">4K</h4>
+                    <p class="text-xs text-gray-500 uppercase font-bold tracking-widest">Quality</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section id="work" class="py-24 bg-[#080808]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tighter">THE WORK</h2>
+                <p class="text-gray-500 text-lg">Click any card to watch the full edit.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <!-- Video Item 1 -->
+                <div class="work-card group rounded-3xl overflow-hidden cursor-pointer" 
+                     data-aos="fade-right" 
+                     onclick="openVideo('https://www.youtube.com/embed/eXgCJm5w2Zg')">
+                    <div class="aspect-video relative">
+                        <img src="https://img.youtube.com/vi/eXgCJm5w2Zg/maxresdefault.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Video 1">
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all flex items-center justify-center">
+                            <div class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 transform scale-0 group-hover:scale-100 transition-all duration-500">
+                                <i class="fas fa-play text-white text-2xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-2 block">Featured Project</span>
+                        <h3 class="text-2xl font-bold">Cinematic Production #01</h3>
+                    </div>
+                </div>
+
+                <!-- Video Item 2 -->
+                <div class="work-card group rounded-3xl overflow-hidden cursor-pointer" 
+                     data-aos="fade-left" 
+                     onclick="openVideo('https://www.youtube.com/embed/Sqh7f3ajV3Q')">
+                    <div class="aspect-video relative">
+                        <img src="https://img.youtube.com/vi/Sqh7f3ajV3Q/maxresdefault.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Video 2">
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all flex items-center justify-center">
+                            <div class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 transform scale-0 group-hover:scale-100 transition-all duration-500">
+                                <i class="fas fa-play text-white text-2xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <span class="text-xs font-bold text-purple-400 uppercase tracking-widest mb-2 block">Documentary Style</span>
+                        <h3 class="text-2xl font-bold">Visual Narrative #02</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hire Me / Contact Section -->
+    <section id="hire" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+            <div data-aos="fade-right">
+                <h2 class="text-5xl md:text-7xl font-black mb-8 tracking-tighter leading-none">Let's Build Your <br><span class="gradient-text">Next Viral Hit.</span></h2>
+                <div class="space-y-6 mt-12">
+                    <div class="flex items-center gap-6">
+                        <div class="w-12 h-12 bg-indigo-600/20 rounded-full flex items-center justify-center text-indigo-400">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <p class="text-lg font-bold">harshil.nariya.official@gmail.com</p>
+                    </div>
+                    <div class="flex items-center gap-6">
+                        <div class="w-12 h-12 bg-green-600/20 rounded-full flex items-center justify-center text-green-400">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <p class="text-lg font-bold">+91 88891 94580</p>
+                    </div>
+                </div>
+                <div class="mt-12 flex flex-wrap gap-4">
+                    <a href="https://wa.me/918889194580" target="_blank" class="px-8 py-4 bg-[#25D366] text-white font-bold rounded-2xl flex items-center gap-3 hover:shadow-xl transition-all">
+                        <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                    </a>
+                    <a href="mailto:harshil.nariya.official@gmail.com" class="px-8 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-2xl hover:bg-white/10 transition-all">
+                        Email Me
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-[#111] p-10 rounded-[2.5rem] border border-white/10 shadow-2xl" data-aos="fade-left">
+                <form id="contactForm" class="space-y-6">
+                    <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:border-indigo-500 outline-none text-white" placeholder="Name">
+                    <input type="email" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:border-indigo-500 outline-none text-white" placeholder="Email">
+                    <textarea rows="4" required class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:border-indigo-500 outline-none text-white" placeholder="Describe your project..."></textarea>
+                    <button type="submit" class="w-full py-5 bg-white text-black font-black uppercase tracking-widest text-sm rounded-2xl hover:bg-indigo-600 hover:text-white transition-all">
+                        Send Inquiry
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Modal -->
+    <div id="videoModal" class="fixed inset-0 z-[100] bg-black/95 hidden items-center justify-center p-4 backdrop-blur-xl">
+        <button class="absolute top-8 right-8 text-5xl text-white font-light hover:rotate-90 transition-transform" onclick="closeVideo()">&times;</button>
+        <div class="max-w-5xl w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+            <iframe id="modalIframe" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-20 border-t border-white/5 text-center">
+        <div class="text-3xl font-black mb-8 tracking-tighter">HARSHBOY<span class="gradient-text">.XE</span></div>
+        <p class="text-gray-600 text-sm font-medium tracking-widest uppercase">&copy; 2024 HARSHBOY.XE • 16-Year-Old Video Editor</p>
+    </footer>
+
+    <script>
+        // Initialize AOS
+        AOS.init({ duration: 1000, once: true });
+
+        // Function to handle the "Hire Me Now" click
+        function navigateToHire() {
+            const hireSection = document.getElementById('hire');
+            if (hireSection) {
+                hireSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function openVideo(url) {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('modalIframe');
+            iframe.src = url + "?autoplay=1";
+            modal.classList.remove('hidden');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('modalIframe');
+            iframe.src = "";
+            modal.classList.add('hidden');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.innerHTML = "<div class='text-center py-10'><i class='fas fa-check-circle text-indigo-500 text-5xl mb-4'></i><h3 class='text-2xl font-bold'>Message Sent!</h3><p class='text-gray-500'>I'll get back to you soon.</p></div>";
+        });
+    </script>
+</body>
+</html>
+
