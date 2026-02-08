@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harshboy.xe | Professional Video Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #050505;
+            color: #ffffff;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .nav-hidden { transform: translateY(-100%); }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: textShine 4s linear infinite;
+        }
+
+        @keyframes textShine {
+            to { background-position: 200% center; }
+        }
+
+        .float-hero { animation: floating 4s ease-in-out infinite; }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(0.5deg); }
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 100vw;
+            height: 100vw;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            top: -25%;
+            left: -10%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .work-card {
+            background: #111;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .work-card:hover {
+            border-color: rgba(99, 102, 241, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        .magnetic { display: inline-block; transition: transform 0.2s ease-out; }
+
+        #videoModal {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        #videoModal.active { display: flex; opacity: 1; }
+        .modal-inner {
+            transform: scale(0.95);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        #videoModal.active .modal-inner { transform: scale(1); }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            background: #000;
+            border-radius: 1rem;
+            overflow: hidden;
+            aspect-ratio: 9/16;
+        }
+        .video-container iframe { width: 100%; height: 100%; }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        @media (min-width: 768px) {
+            .whatsapp-float { bottom: 40px; right: 40px; }
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #050505; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+    </style>
+</head>
+<body>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/918889194580" target="_blank" class="whatsapp-float bg-[#25D366] text-white w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center shadow-2xl magnetic">
+        <i class="fab fa-whatsapp text-2xl md:text-3xl"></i>
+    </a>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 glass-nav">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 h-16 md:h-20 flex items-center justify-between">
+            <div class="text-xl md:text-2xl font-black tracking-tighter" data-aos="fade-right">
+                <span class="gradient-text">HARSHBOY</span>.XE
+            </div>
+            <div class="hidden lg:flex space-x-8 font-bold text-[10px] uppercase tracking-[0.2em] text-gray-400">
+                <a href="#home" class="hover:text-white transition-colors">Home</a>
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#work" class="hover:text-white transition-colors">Showcase</a>
+                <a href="#hire" class="hover:text-white transition-colors">Hire Me</a>
+            </div>
+            <a href="https://wa.me/918889194580" target="_blank" class="px-5 py-2 md:px-7 md:py-2.5 bg-indigo-600 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest hover:bg-indigo-500 transition-all shadow-lg shadow-indigo-600/20" data-aos="fade-left">
+                Hire Me
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
+        <div class="hero-glow"></div>
+        <div class="relative z-10 text-center px-4 w-full max-w-6xl">
+            <h2 class="text-indigo-400 font-bold tracking-[0.4em] uppercase mb-6 text-[10px] md:text-sm" data-aos="fade-down">Premium Video Editing</h2>
+            <div class="float-hero">
+                <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-[9rem] xl:text-[11rem] font-black mb-8 leading-[0.9] tracking-tighter" data-aos="zoom-in" data-aos-duration="1200">
+                    Harshboy<span class="gradient-text">.xe</span>
+                </h1>
+            </div>
+            <p class="text-gray-400 text-sm md:text-xl lg:text-2xl mb-10 max-w-2xl mx-auto font-light leading-relaxed px-4" data-aos="fade-up" data-aos-delay="300">
+                High-retention editing for <span class="text-white font-semibold">creators who want to go viral.</span> 
+                From 60s Reels to long-form documentaries.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6" data-aos="fade-up" data-aos-delay="500">
+                <a href="#work" class="w-full sm:w-auto px-10 py-4 bg-white text-black font-black uppercase tracking-widest text-[10px] md:text-xs rounded-full hover:bg-indigo-600 hover:text-white transition-all transform hover:scale-105 shadow-xl magnetic">
+                    See My Work
+                </a>
+                <a href="#hire" class="w-full sm:w-auto px-10 py-4 border border-white/20 rounded-full font-black uppercase tracking-widest text-[10px] md:text-xs hover:bg-white/5 transition-all magnetic">
+                    Start a Project
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Grid (Locked to 2x2 Grid) -->
+    <section id="work" class="py-20 md:py-32 bg-[#080808]">
+        <div class="max-w-4xl mx-auto px-4 md:px-8"> 
+            <div class="text-center mb-12 md:mb-20" data-aos="fade-up">
+                <h2 class="text-4xl md:text-6xl font-black mb-4 tracking-tighter uppercase">My Work</h2>
+                <div class="h-1 w-12 bg-indigo-600 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 md:gap-10">
+                <!-- Video 1 -->
+                <div class="work-card group rounded-2xl md:rounded-[2.5rem] overflow-hidden cursor-pointer shadow-2xl" 
+                     data-aos="fade-up" 
+                     onclick="openVideo('https://www.youtube.com/embed/eXgCJm5w2Zg')">
+                    <div class="aspect-[9/16] relative overflow-hidden bg-neutral-900">
+                        <img src="https://img.youtube.com/vi/eXgCJm5w2Zg/maxresdefault.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Work 1">
+                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500 flex items-center justify-center">
+                            <div class="w-10 h-10 md:w-16 md:h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 transform scale-90 group-hover:scale-100 transition-all">
+                                <i class="fas fa-play text-white text-base md:text-2xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="work-card group rounded-2xl md:rounded-[2.5rem] overflow-hidden cursor-pointer shadow-2xl" 
+                     data-aos="fade-up" data-aos-delay="100"
+                     onclick="openVideo('https://www.youtube.com/embed/Sqh7f3ajV3Q')">
+                    <div class="aspect-[9/16] relative overflow-hidden bg-neutral-900">
+                        <img src="https://img.youtube.com/vi/Sqh7f3ajV3Q/maxresdefault.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Work 2">
+                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500 flex items-center justify-center">
+                            <div class="w-10 h-10 md:w-16 md:h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 transform scale-90 group-hover:scale-100 transition-all">
+                                <i class="fas fa-play text-white text-base md:text-2xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="work-card group rounded-2xl md:rounded-[2.5rem] overflow-hidden cursor-pointer shadow-2xl" 
+                     data-aos="fade-up" data-aos-delay="200"
+                     onclick="openVideo('https://www.youtube.com/embed/CeKsLnT1yaA')">
+                    <div class="aspect-[9/16] relative overflow-hidden bg-neutral-900">
+                        <img src="https://img.youtube.com/vi/CeKsLnT1yaA/maxresdefault.jpg" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Work 3">
+                        <div class="absolute inset-0 bg-black/30 group-hover:bg-black/10 transition-all duration-500 flex items-center justify-center">
+                            <div class="w-10 h-10 md:w-16 md:h-16 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 transform scale-90 group-hover:scale-100 transition-all">
+                                <i class="fas fa-play text-white text-base md:text-2xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 md:py-32 bg-[#030303]">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-widest text-indigo-400 mb-8" data-aos="fade-up">Profile</span>
+            <h2 class="text-3xl md:text-5xl lg:text-6xl font-black mb-10 tracking-tighter leading-tight" data-aos="fade-up">16 Year Old Editor. <br><span class="gradient-text">Infinite Creativity.</span></h2>
+            <p class="text-sm md:text-xl text-gray-400 leading-relaxed mb-16 max-w-3xl mx-auto" data-aos="fade-up">
+                I specialize in "retention-based" editing. I don't just cut clips together; I manipulate pacing, sound, and visuals to keep your viewers watching until the very last second.
+            </p>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <div class="p-6 md:p-8 rounded-[2rem] bg-white/5 border border-white/5 hover:bg-white/[0.08] transition-all">
+                    <h4 class="text-3xl md:text-4xl font-black text-white">2+</h4>
+                    <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest mt-2">Years Exp</p>
+                </div>
+                <div class="p-6 md:p-8 rounded-[2rem] bg-white/5 border border-white/5 hover:bg-white/[0.08] transition-all">
+                    <h4 class="text-3xl md:text-4xl font-black text-white">100+</h4>
+                    <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest mt-2">Projects</p>
+                </div>
+                <div class="p-6 md:p-8 rounded-[2rem] bg-white/5 border border-white/5 hover:bg-white/[0.08] transition-all">
+                    <h4 class="text-3xl md:text-4xl font-black text-white">50+</h4>
+                    <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest mt-2">Clients</p>
+                </div>
+                <div class="p-6 md:p-8 rounded-[2rem] bg-white/5 border border-white/5 hover:bg-white/[0.08] transition-all">
+                    <h4 class="text-3xl md:text-4xl font-black text-white">4K</h4>
+                    <p class="text-[10px] text-gray-500 uppercase font-bold tracking-widest mt-2">Res</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="hire" class="py-20 md:py-32 relative">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+            <div data-aos="fade-right">
+                <h2 class="text-4xl md:text-7xl font-black mb-8 tracking-tighter leading-none">Let's build <br><span class="gradient-text">Something Big.</span></h2>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/5">
+                        <i class="fas fa-envelope text-indigo-400"></i>
+                        <span class="text-xs md:text-base font-bold truncate">harshil.nariya.official@gmail.com</span>
+                    </div>
+                    <div class="flex items-center gap-4 p-5 rounded-2xl bg-white/5 border border-white/5">
+                        <i class="fas fa-phone text-green-400"></i>
+                        <span class="text-xs md:text-base font-bold">+91 88891 94580</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-[#111] p-8 md:p-12 rounded-[2.5rem] border border-white/10" data-aos="zoom-in">
+                <form id="contactForm" class="space-y-5">
+                    <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 focus:border-indigo-500 outline-none text-white text-sm" placeholder="Your Name">
+                    <input type="email" required class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 focus:border-indigo-500 outline-none text-white text-sm" placeholder="Your Email">
+                    <textarea rows="4" required class="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 focus:border-indigo-500 outline-none text-white text-sm" placeholder="Tell me about your project..."></textarea>
+                    <button type="submit" class="w-full py-5 bg-white text-black font-black uppercase tracking-widest text-xs rounded-xl hover:bg-indigo-600 hover:text-white transition-all shadow-xl">Get Started</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="videoModal" class="fixed inset-0 z-[1000] bg-black/95 hidden items-center justify-center p-4 backdrop-blur-xl">
+        <button class="absolute top-6 right-6 text-4xl text-white/50 hover:text-white transition-all z-[1001]" onclick="closeVideo()">&times;</button>
+        <div id="modalInner" class="modal-inner w-full max-w-[400px]">
+            <div id="videoContainer" class="video-container shadow-2xl">
+                <iframe id="modalIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-16 border-t border-white/5 text-center px-4">
+        <div class="text-2xl font-black mb-6 tracking-tighter">HARSHBOY<span class="gradient-text">.XE</span></div>
+        <p class="text-gray-600 text-[10px] font-bold tracking-[0.3em] uppercase">&copy; 2024 HARSHBOY.XE • All Rights Reserved</p>
+    </footer>
+
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 80) navbar.classList.add('nav-hidden');
+            else navbar.classList.remove('nav-hidden');
+            lastScroll = currentScroll;
+        });
+
+        const magnetics = document.querySelectorAll('.magnetic');
+        magnetics.forEach(btn => {
+            btn.addEventListener('mousemove', function(e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                this.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            });
+            btn.addEventListener('mouseleave', function() { this.style.transform = `translate(0px, 0px)`; });
+        });
+
+        function openVideo(url) {
+            const modal = document.getElementById('videoModal');
+            const iframe = document.getElementById('modalIframe');
+            iframe.src = url + "?autoplay=1&rel=0";
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById('videoModal');
+            document.getElementById('modalIframe').src = "";
+            modal.classList.remove('active');
+            setTimeout(() => modal.style.display = 'none', 400);
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('videoModal').addEventListener('click', (e) => {
+            if(e.target.id === 'videoModal') closeVideo();
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.innerHTML = `<div class="text-center py-10"><i class="fas fa-check-circle text-indigo-500 text-6xl mb-4"></i><h3 class="text-2xl font-black mb-2">Sent!</h3><p class="text-gray-500 text-sm">I'll contact you soon.</p></div>`;
+        });
+    </script>
+</body>
+</html>
+
